@@ -17,7 +17,7 @@ export default {
 <style scoped>
 
 div.background {
-  padding-top: 20px;
+  padding-top: 10px;
   text-align: center;
   background: white;
 }

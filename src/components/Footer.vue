@@ -1,5 +1,5 @@
 <template>
-  <div class="background">
+  <div class="footer">
     This is footer area {{ msg }}
   </div>
 </template>
@@ -14,10 +14,14 @@ export default {
 </script>
 
 <style scoped>
-div.background {
+.footer {
+  position: relative;
+  height: 80px;
+  line-height: 80px;
+  margin-top: -20px;
+  background: #409EFF;
+  color: #fff;
+  font-size: 16px;
   text-align: center;
-  background: #ddd;
-  margin-top: 20px;
-  height: 100px;
 }
 </style>

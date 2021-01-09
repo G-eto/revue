@@ -1,66 +1,82 @@
 <template>
   <div id="app">
-    <Header msg="脑阔"></Header>
-    <div class="row">
-      <Menu class="menu" v-on:change-page="changePage"></Menu>
-      <Devices v-if="currentPage === 'devices'" class="dataContent" type="cloud phone" count="32" account="we"></Devices>
-    </div>
-    <Footer msg="jiojio"></Footer>
+    <el-container>
+      <el-header>
+        <Header msg="hhh"></Header>
+      </el-header>
+      <el-container>
+        <el-aside v-bind:width=menuWidth>
+          <MainMenu v-on:change-page="changePage" v-on:is-open="isMenuOpen"></MainMenu>
+        </el-aside>
+        <el-main>
+          <Devices v-if="currentPage === 'devices'" type="cloud phone" count="32" account="we"></Devices>
+          <Header v-if="currentPage === 'docs'" msg="doc"></Header>
+          <Header v-if="currentPage === 'manager'" msg="admin"></Header>
+          <Header v-if="currentPage === 'overview'" msg="ov"></Header>
+        </el-main>
+      </el-container>
+      <div :style="{minHeight: minHeight + 'px'}"></div>
+      <el-footer>
+        <Footer msg="jio jio"></Footer>
+      </el-footer>
+    </el-container>
   </div>
 </template>
 
 <script>
-import Devices from "./page/devices/Devices";
+
+import MainMenu from "@/components/MainMenu";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import Menu from "@/components/Menu";
+import Devices from "@/page/devices/Devices";
 
 export default {
   name: 'App',
-  components: {
-    Header,
-    Menu,
-    Devices,
-    Footer
-  },
+  components: {MainMenu, Footer, Header, Devices},
   data(){
     return{
-      currentPage: "devices"
+      currentPage: "devices",
+      minHeight: 0,
+      menuWidth: "140px"
     }
+  },
+  comments: {
+    Devices,
+    MainMenu,
+    Header,
+    Footer
   },
   methods: {
     changePage: function (value){
       this.currentPage = value
+      let high = 550;
+      if (this.currentPage === "devices"){
+        high = 570
+      }
+      this.setFooter(high)
       console.log(this.currentPage)
+    },
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    isMenuOpen(open){
+      this.menuWidth = open ? "140px" : "48px"
+    },
+    setFooter(high){
+      this.minHeight = document.documentElement.clientHeight - high
+      if (this.minHeight < 0)
+        this.minHeight = 0
+      console.log(this.minHeight)
     }
+  },
+  mounted(){
+    this.setFooter()
   }
 }
 </script>
 
 <style>
-html, body, #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  min-height:100vh;
-  /*padding-top: 10px;*/
-}
-
-.menu {
-  float: left;
-  width: 25%;
-}
-
-.dataContent {
-  float: left;
-  width: 75%;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
 </style>

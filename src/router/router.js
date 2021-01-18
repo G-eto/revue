@@ -1,24 +1,44 @@
-import App from "../App"
+// import App from "../App"
+import DeviceDetail from "@/page/devices/DeviceDetail";
+import Vue from "vue";
+import VueRouter from "vue-router";
+import overview from "@/page/ov/overview";
 
-export default [{
-    path: '/',
-    component: App,
-    children: [{
-        path: 'devices',
-        component: r => require.ensure([], () => r(require('../page/devices/Devices')), 'devices')
+const routers = [
+    // {
+    // path: '/',
+    // name: 'index',
+    // component: App,
+    // children: [
+        {
+        path: '/devices',
+            component: DeviceDetail,
+        // component: () => import('../page/devices/Devices'),
+        children: [{
+            path: ':id',
+            name: 'detail',
+            component: ()=> import('../page/devices/DeviceDetail')
+        }]
+    }, {
+        path: '/overview',
+        name: 'overview',
+        component: overview
+    }, {
+        path: 'doc/',
+        name: 'document',
+        component: () => import('../page/doc/doc')
+    }, {
+        path: '/manage',
+        name: 'manager',
+        component: () => import('../page/manage/manage')
     }
-        // ,{
-        //     path: 'overview',
-        //     component: r => require.ensure([], ()=> r(require('../page/overview')), 'overview')
-        // },{
-        //     path: 'config',
-        //     component: r => require.ensure([], ()=> r(require('../page/config')), 'config')
-        // },{
-        //     path: 'other',
-        //     component: r => require.ensure([], ()=> r(require('../page/other')), 'other')
-        // },{
-        //     path: 'user',
-        //     component: r => require.ensure([], ()=> r(require('../page/user')), 'user')
-        // }
-    ]
-}]
+]
+
+Vue.use(VueRouter)
+const router = new VueRouter({
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: routers
+})
+
+export default router

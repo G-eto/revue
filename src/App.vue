@@ -9,10 +9,11 @@
           <MainMenu v-on:change-page="changePage" v-on:is-open="isMenuOpen"></MainMenu>
         </el-aside>
         <el-main>
+          <router-view></router-view>
           <Devices v-if="currentPage === 'devices'" type="cloud phone" count="32" account="we"></Devices>
-          <Header v-if="currentPage === 'docs'" msg="doc"></Header>
-          <Header v-if="currentPage === 'manager'" msg="admin"></Header>
-          <Header v-if="currentPage === 'overview'" msg="ov"></Header>
+          <doc v-if="currentPage === 'docs'" msg="doc"></doc>
+          <manage v-if="currentPage === 'manager'" msg="admin"></manage>
+          <overview v-if="currentPage === 'overview'" msg="ov"></overview>
         </el-main>
       </el-container>
       <div :style="{minHeight: minHeight + 'px'}"></div>
@@ -29,13 +30,16 @@ import MainMenu from "@/components/MainMenu";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Devices from "@/page/devices/Devices";
+import overview from "@/page/ov/overview";
+import doc from "@/page/doc/doc";
+import manage from "@/page/manage/manage";
 
 export default {
   name: 'App',
-  components: {MainMenu, Footer, Header, Devices},
+  components: {MainMenu, Footer, Header, Devices, overview, doc, manage},
   data(){
     return{
-      currentPage: "devices",
+      currentPage: "overview",
       minHeight: 0,
       menuWidth: "140px"
     }

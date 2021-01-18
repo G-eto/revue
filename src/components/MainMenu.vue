@@ -18,6 +18,14 @@
         <i class="el-icon-setting"></i>
         <span slot="title">Manage</span>
       </el-menu-item>
+      <el-menu-item index="5">
+        <router-link to="/devices">
+          <div>
+            <i class="el-icon-link"></i>
+            <span slot="title">detail</span>
+          </div>
+        </router-link>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -33,10 +41,10 @@ export default {
   },
   methods: {
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+      console.log("open" ,key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      console.log("close", key, keyPath);
     },
     switchMenu(){
       const b = !this.isMenuOpen;

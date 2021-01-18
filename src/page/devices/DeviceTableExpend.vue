@@ -1,27 +1,25 @@
 <template>
-  <el-form label-position="left" inline class="demo-table-expand">
-    <el-form-item label="商品名称">
-      <span>{{ content.id }}</span>
-    </el-form-item>
-    <el-form-item label="所属店铺">
-      <span>{{ content.shop }}</span>
-    </el-form-item>
-    <el-form-item label="商品 ID">
-      <span>{{ content.id }}</span>
-    </el-form-item>
-    <el-form-item label="店铺 ID">
-      <span>{{ content.shopId }}</span>
-    </el-form-item>
-    <el-form-item label="商品分类">
-      <span>{{ content.category }}</span>
-    </el-form-item>
-    <el-form-item label="店铺地址">
-      <span>{{ content.address }}</span>
-    </el-form-item>
-    <el-form-item label="商品描述">
-      <span>{{ content.desc }}</span>
-    </el-form-item>
-  </el-form>
+  <div>
+    <el-row>
+      <el-col :span="12">
+        <div class="grid-content bg-purple">
+          {{content.id}}
+        </div>
+      </el-col>
+      <el-col :span="12">
+        <div class="grid-content bg-purple-light">
+          {{content.content}}
+        </div>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="24">
+        <div class="grid-content bg-purple-dark">
+          {{content.date}}
+        </div>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
